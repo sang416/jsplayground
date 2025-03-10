@@ -1,0 +1,166 @@
+  <!doctype html>
+  <html lang="ko">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      <link rel="icon" href="/favicon.ico" type="image/x-icon">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <title>이상균의 플레이그라운드</title>
+      <link rel="stylesheet" href="main.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" id="prism-light">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" id="prism-dark" disabled>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+
+      <!-- Prism 폰트 커스터마이징을 위한 스타일 추가 -->
+      <style>
+        code[class*="language-"],
+        pre[class*="language-"] {
+          font-family: 'Fira Code', 'Source Code Pro', monospace;
+          font-size: 14px;
+        }
+        
+        /* 다크 모드에서의 폰트 스타일 (선택 사항) */
+        .dark-mode code[class*="language-"],
+        .dark-mode pre[class*="language-"] {
+          font-family: 'Fira Code', 'Source Code Pro', monospace;
+          font-size: 14px;
+        }
+      </style>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js" integrity="sha512-7Zgn4mmO9yGGB1j9yP0mZvUPWBVg0fCcUMsYUV6FX7XIKQfb/dhGxsKh794YAzXH2F/+Z3eJL4mrTilrT2ZeFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+      
+
+    </head>
+    <body>
+      <a href="#"></a>
+
+      <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <form action="success.html" method="get">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-danger" id="close">닫기</button>
+          </form>
+        </div>
+      </div> 
+
+      <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+          <span class="navbar-brand">Sanggyun's Playground</span>
+          <button type="button" class="btn btn-secondary home-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-danger login-btn" id="login" style="margin-left: 20px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+            </svg>
+            Login
+          </button>
+          <button class="badge bg-dark border-0" id="theme-toggle">Dark Mode 🔄</button>
+          <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav> 
+      <br><br>
+      <h1 id="title">JAMstack을 활용한 웹사이트</h1>
+      <ul class="list-group">
+        <li class="list-group-item">Front-End Web Development</li>
+        <li class="list-group-item">Back-End Web Development</li>
+        <li class="list-group-item">LLM Web Service</li>
+        <li class="list-group-item">ML/DL Engineering</li>
+        <li class="list-group-item">Game Development</li>
+      </ul> 
+      <!-- <div class="main-bg">
+        <h4>Welcome to my playground of coding and development~!</h4>
+        <button id="login" class="btn btn-danger login-btn">Login</button>
+      </div> -->
+      <div class="alert alert-danger">
+        <span id="offtime">5</span>초안에 이벤트에 응모하셔야 합니다.
+      </div>
+      <button class="btn btn-primary" id="button">count</button>
+      <div style="margin:10px;">
+        <div>✅ Click count: <span id="clickCount">0</span></div>
+        <div>✅ Loop count: <span id="loopCount">0</span></div>
+        <div>✅ Your Info : <span id="userInfo">_</span></div>
+        <div>✅ Your Platform : <span id="userPlatform">_</span></div>
+        <div>✅ Your IP : <span id="userIP">_</span></div>
+      </div>
+      
+    <br>
+    <button class="btn-3d" id="playButton">Play Music</button>
+    <button class="btn-3d" id="stopButton" style="margin-left:20px">Stop Music</button>
+    <div> 
+      Swipe the image to see the next one.
+    </div>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="pic1.png">
+        </div>
+        <div class="slide-box">
+          <img src="pic2.png">
+        </div>
+        <div class="slide-box">
+          <img src="pic3.png">
+        </div>
+        <div class="slide-box">
+          <img src="pic4.png">
+        </div>
+      </div>
+    </div> 
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="slide-4">4</button>
+    <button class="slide-5">◀️</button>
+    <button class="slide-6">▶️</button>
+    <div class="lorem" style="width:100vw; height:200px; color :rgb(0, 0, 0); background-color:#c0c0c0; margin-top:20px; overflow-y:scroll; scrollbar-width:thin;">
+      The morning sun casts a golden glow over the rolling green hills, illuminating the peaceful countryside with a warmth that is both gentle and invigorating. The sky, a vast expanse of brilliant blue, is adorned with delicate wisps of white clouds, stretching endlessly towards the horizon. A cool breeze carries the fresh scent of grass and wildflowers, whispering softly through the open fields.
+
+      Cows, their coats a mixture of warm brown and creamy white, graze contentedly on the lush pastures. Their slow, deliberate movements exude a sense of tranquility, their gentle presence adding life to the serene landscape. Some stand in small groups, their tails flicking lazily in the air, while others lower their heads to nibble on the soft grass, savoring the simple pleasures of the morning. The distant chime of cowbells rings faintly in the air, blending harmoniously with the chirping of birds perched on nearby trees.
+
+      Nestled among the verdant hills, quaint farmhouses with red-tiled roofs and wooden shutters dot the landscape, their rustic charm adding character to the idyllic scenery. Smoke curls lazily from the chimneys, hinting at the comforting scent of a warm breakfast being prepared inside. The farms, neatly lined with fences and hedgerows, stretch out in every direction, forming a picturesque patchwork of cultivated fields and grazing lands.
+
+      Beyond the pastures, the towering peaks of majestic mountains rise against the horizon, their rugged slopes covered in dense forests of evergreen trees. The sunlight dances upon the jagged ridges, casting a mesmerizing contrast between the bright, sunlit peaks and the shadowy valleys below. In the distance, a glistening lake reflects the azure sky, its tranquil waters mirroring the beauty of the surrounding landscape.
+
+      The air is crisp and refreshing, filled with the earthy fragrance of damp soil and the sweet aroma of blooming flowers. Butterflies flutter from one blossom to another, their delicate wings catching the light in a dazzling display of colors. Bees hum industriously as they gather nectar, weaving through the wild meadows that spread like a natural carpet across the land.
+
+      As the morning unfolds, the countryside awakens with the gentle rhythm of rural life. A farmer, clad in sturdy overalls, walks along a narrow dirt path, his faithful dog trotting beside him. The soft crunch of gravel underfoot mingles with the distant sound of a tractor humming steadily as it moves across a golden field. A sense of timelessness lingers in the air, as if this tranquil world exists outside the rush and clamor of modern life.
+
+      The simplicity and beauty of this moment are captivating, a reminder of the quiet wonders that nature offers to those who take the time to appreciate them. There is a profound sense of harmony between the land, the animals, and the people who call this countryside home. Here, amidst the rolling green fields and towering mountains, life moves at a slower, more deliberate pace—a testament to the enduring charm of the rural landscape.
+
+      As the sun climbs higher in the sky, its light grows warmer, casting long shadows that stretch across the fields. The cows continue to graze peacefully, the breeze rustles through the grass, and the mountains stand tall and proud, watching over the land like silent guardians. The day has only just begun, yet the serenity of this countryside morning promises a day filled with quiet joys and simple pleasures.
+    </div>
+    <br><br>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="myjava.js"></script>
+  </body>
+</html>
