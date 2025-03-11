@@ -242,6 +242,7 @@ const EventManager = {
     EventManager.setupModalEvents();
     EventManager.setupCounterEvents();
     EventManager.loadCode();
+    EventManager.setupProgressEvents();
     // GSAP 애니메이션 설정
     gsap.from("#title", { 
       duration: 2, 
@@ -291,6 +292,17 @@ const EventManager = {
       } else {
         isBottom = false;
       }
+    });
+  },
+
+  setupProgressEvents: () => {
+    $(window).on('scroll', () => {
+      const scrollTop = $(window).scrollTop();
+      const windowHeight = $(window).height();
+      const documentHeight = $(document).height();
+      console.log(scrollTop, windowHeight, documentHeight);
+      const progress = ((scrollTop + windowHeight) / documentHeight) * 100;
+      $('.progress').val(progress);
     });
   },
   

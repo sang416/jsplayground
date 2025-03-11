@@ -193,3 +193,22 @@ body {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.1s ease-in-out;
 }
+
+.progress {
+  width: 100%;
+  height: 5px;
+  border-radius: 2px;
+  position: fixed;
+  top: 56px;  /* navbar 높이와 동일하게 설정 */
+  left: 0;
+  z-index: 5;
+  margin: 0;
+}
+
+.progress::-webkit-progress-value {
+  background-color: #0d6efd;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: #f0f0f0;
+} 
