@@ -242,6 +242,7 @@ const EventManager = {
     EventManager.setupModalEvents();
     EventManager.setupCounterEvents();
     EventManager.loadCode();
+    EventManager.loadCssCode();
     EventManager.setupProgressEvents();
     // GSAP 애니메이션 설정
     gsap.from("#title", { 
@@ -361,6 +362,13 @@ const EventManager = {
     const response = await fetch('./myjava.js'); // 외부 코드 파일
     const code = await response.text();
     document.getElementById('code-block').textContent = code;
+    Prism.highlightAll(); // Prism.js 하이라이팅 적용
+  },
+
+  loadCssCode : async () => {
+    const response = await fetch('./main.css'); // 외부 코드 파일
+    const code = await response.text();
+    document.getElementById('css-block').textContent = code;
     Prism.highlightAll(); // Prism.js 하이라이팅 적용
   }
 };
