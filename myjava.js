@@ -124,6 +124,8 @@ const ThemeManager = {
       // Prism 테마 변경
       $('#prism-light').prop('disabled', true);
       $('#prism-dark').prop('disabled', false);
+      // 하이라이팅 다시 적용
+      Prism.highlightAll();
     } else {
       // 라이트 모드로 변경
       elements.body.removeClass('dark-mode').addClass('light-mode');
@@ -136,6 +138,8 @@ const ThemeManager = {
       // Prism 테마 변경
       $('#prism-light').prop('disabled', false);
       $('#prism-dark').prop('disabled', true);
+      // 하이라이팅 다시 적용
+      Prism.highlightAll();
     }
   },
   
