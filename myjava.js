@@ -181,9 +181,8 @@ const ToastManager = {
   }
 };
 
-// 슬라이드 관리자
 /**
- * Description placeholder
+ * 슬라이드 관리자
  *
  * @type {{ currentSlide: number; totalSlides: number; init: () => void; goToSlide: (slideNum: any) => void; prevSlide: () => void; nextSlide: () => void; initSwipeEvents: () => void; }}
  */
@@ -248,6 +247,8 @@ const EventManager = {
     EventManager.loadCode();
     EventManager.loadCssCode();
     EventManager.setupProgressEvents();
+    EventManager.clickTab();
+
     // GSAP 애니메이션 설정
     gsap.from("#title", { 
       duration: 2, 
@@ -305,7 +306,7 @@ const EventManager = {
       const scrollTop = $(window).scrollTop();
       const windowHeight = $(window).height();
       const documentHeight = $(document).height();
-      console.log(scrollTop, windowHeight, documentHeight);
+      // console.log(scrollTop, windowHeight, documentHeight);
       const progress = ((scrollTop + windowHeight) / documentHeight) * 100;
       $('.progress').val(progress);
     });
@@ -374,12 +375,27 @@ const EventManager = {
     const code = await response.text();
     document.getElementById('css-block').textContent = code;
     Prism.highlightAll(); // Prism.js 하이라이팅 적용
+  },
+
+  clickTab: () => {
+    const $tabButton = $('.tab-button');
+    const $tabContent = $('.tab-content');
+    
+    // 이벤트 위임(Event Delegation)을 사용하여 개별 이벤트 리스너 대신 부모 요소에 하나의 이벤트 리스너 등록
+    $('.list').on('click', '.tab-button', function() {
+      const index = $(this).index();
+      
+      $tabButton.removeClass('orange');
+      $tabContent.removeClass('show');
+      
+      $(this).addClass('orange');
+      $tabContent.eq(index).addClass('show');
+    });
   }
 };
 
-// 유틸리티 함수
 /**
- * Description placeholder
+ * 유틸리티 함수
  *
  * @type {{ getUserInfo: () => void; getUserIp: () => void; startCountdown: (seconds: any, onComplete: any) => any; }}
  */
@@ -423,9 +439,8 @@ const Utils = {
   }
 };
 
-// 웹 워커 관리자
 /**
- * Description placeholder
+ * 웹 워커 관리자
  *
  * @type {{ init: () => void; }}
  */
