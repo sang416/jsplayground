@@ -349,7 +349,13 @@ const EventManager = {
     
     $('#close').on('click', () => elements.blackBg.toggleClass('show-modal'));
     
+    // elements.blackBg = $('.black-bg')
     elements.blackBg.on('click', (e) => {
+      console.log("%c e.target", "background-color: red; color: black", e.target);
+      console.log("%c e.currentTarget", "background-color: yellow; color: black", e.currentTarget);
+      console.log("%c this", "background-color: green; color: black", globalThis);
+      console.log("%c elements.blackBg", "background-color: orange; color: black", elements.blackBg);
+      console.log("--------------------------------");
       if (e.target === e.currentTarget) {
         elements.blackBg.toggleClass('show-modal');
       }
@@ -486,7 +492,21 @@ $(() => {
   ThemeManager.init();
   SlideManager.init();
   EventManager.init();
-  
+  const $content = $('.content');
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold : 0.5
+  });
+  $content.each(function() {
+    observer.observe(this);
+  });
   // 페이지 로드 시 실행
   $(document).ready(() => {
     Utils.getUserInfo();
