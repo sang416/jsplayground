@@ -250,14 +250,14 @@ const EventManager = {
     EventManager.clickTab();
 
     // GSAP 애니메이션 설정
-    gsap.from("#title", { 
-      duration: 2, 
-      opacity: 0, 
-      y: -50, 
-      ease: "bounce", 
-      repeat: -1, 
-      yoyo: true 
-    });
+    // gsap.from("#title", { 
+    //   duration: 2, 
+    //   opacity: 0, 
+    //   y: -50, 
+    //   ease: "bounce", 
+    //   repeat: -1, 
+    //   yoyo: true 
+    // });
   },
   
   setupNavbarEvents: () => {
@@ -518,5 +518,11 @@ $(() => {
     
     // 웹 워커 초기화
     WebWorkerManager.init();
+
+    const animateTitle = () =>{
+      $('#title').animate({'fontSize': '100px','color': 'blue'}, 1000,'easeOutBounce',()=> $('h1').animate({'fontSize': '25px','color': 'black'}));
+    }
+    animateTitle();
+    setInterval(animateTitle, 2000);
   });
 });
