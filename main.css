@@ -262,3 +262,71 @@ ul.list::after {
   background-color: black;
   color: white;
 }
+
+
+body{
+  font-family: arial,helvetica;
+  color: #fff;
+  text-align:center;
+}
+
+h1{
+  font-size: 6em;
+  font-size: calc(2em + 2vw);
+  margin:0;
+  text-shadow: 0px 0 17px rgba(0,0,0,0.8);
+}
+
+/* Overwriting styles for the navigation dots */
+#fp-nav ul li a span, 
+.fp-slidesNav ul li a span{
+  background: white;
+}
+
+/* Backgrounds will cover all the section */
+.section,
+.slide{
+  /* Important! Videos use absolute */
+  position: relative;
+
+  background-size: cover;
+
+  /* Making sure videos won't overflow */
+  overflow: hidden;
+}
+
+
+/* Layer with position absolute in order to have it over the video */
+.layer{
+  /*
+  * Preventing flicker on some browsers
+  * See http://stackoverflow.com/a/36671466/1081396  or issue #183
+  */
+  -webkit-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.overlay-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  z-index: -100;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Making the Youtube video cover the whole viewport */
+@media (min-aspect-ratio: 16/9) {
+  .overlay-video {
+      height: 56.25vw;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .overlay-video {
+      width: 177.78vh;
+  }
+}

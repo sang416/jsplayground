@@ -519,10 +519,20 @@ $(() => {
     // 웹 워커 초기화
     WebWorkerManager.init();
 
-    const animateTitle = () =>{
-      $('#title').animate({'fontSize': '100px','color': 'blue'}, 1000,'easeOutBounce',()=> $('h1').animate({'fontSize': '25px','color': 'black'}));
-    }
-    animateTitle();
-    setInterval(animateTitle, 2000);
+    // const animateTitle = () =>{
+    //   $('#title').animate({'fontSize': '100px','color': 'blue'}, 1000,'easeOutBounce',()=> $('h1').animate({'fontSize': '25px','color': 'black'}));
+    // }
+    // animateTitle();
+    // setInterval(animateTitle, 2000);
+  });
+  var myFullpage = new fullpage('#fullpage', {
+    anchors: ['home', 'content', 'footer'],
+
+    // Get your license at https://alvarotrigo.com/fullPage/pricing
+    licenseKey: 'xxxxxxxxxxxxxxxxxxxxxxxxx',
+
+    // Optional
+    navigation: true,
+    scrollingSpeed: 700
   });
 });

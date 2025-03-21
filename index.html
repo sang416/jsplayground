@@ -47,12 +47,12 @@
       <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js" integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-      
+      <script src="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.34/dist/fullpage.min.js" integrity="sha256-TRTKOVjQAAtO73SE2uUReFr1PsShtdFgIoNNyUv6p7c=" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.34/dist/fullpage.min.css" integrity="sha256-vcczmocSzAtWywt5rG9ZxGShqGot0bP/M3Enw4VDFrQ=" crossorigin="anonymous">
 
     </head>
     <body>
       <a href="#"></a>
-
       <div class="black-bg">
         <div class="white-bg">
           <h4>로그인하세요</h4>
@@ -102,6 +102,40 @@
       </div>
       
       <br><br>
+        <!-- fullPage.js HTML -->
+    <div id="fullpage">
+      <div class="section" id="section0">
+
+          <iframe class="overlay-video" src="https://www.youtube.com/embed/1DZoiyKcdGI?si=LPJoVyY2Vnchc03V&autoplay=1&mute=1&controls=0&start=20" data-keepplaying="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          
+          <div class="layer">
+              <h1>Youtube <br>Background</h1>
+          </div>
+      </div>
+      <div class="section" id="section1">
+          <div class="slide" id="slide1">
+              <iframe class="overlay-video" src="https://www.youtube.com/embed/hOgVAYpHPCc?si=B1IpD962t3aqDzoO&autoplay=1&mute=1&controls=0" data-keepplaying="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+              <div class="layer">
+                  <h1>Section 2</h1>
+              </div>
+          </div>
+          <div class="slide" id="slide1">
+              <iframe class="overlay-video" src="https://www.youtube.com/embed/2Gg6Seob5Mg?si=61Z0kAKbqGJvjRex&autoplay=1&mute=1&controls=0" data-keepplaying="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+              <div class="layer">
+                  <h1>Slide 2.1</h1>
+              </div>
+          </div>
+      </div>
+      <div class="section" id="section2">
+          <iframe class="overlay-video" src="https://www.youtube.com/embed/9u7js5YYudM?si=61Z0kAKbqGJvjRex&autoplay=1&mute=1&controls=0" data-keepplaying="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+          <div class="layer">
+              <h1>Section 3</h1>
+          </div>
+      </div>
+    </div>
       <h1 id="title">JAMstack을 활용한 웹사이트</h1>
       <ul class="list-group">
         <li class="list-group-item">Front-End Web Development</li>
@@ -125,7 +159,7 @@
         <div>✅ Your Platform : <span id="userPlatform">_</span></div>
         <div>✅ Your IP : <span id="userIP">_</span></div>
       </div>
-      
+    
     <br>
     <button class="btn-3d" id="playButton">Play Music</button>
     <button class="btn-3d" id="stopButton" style="margin-left:20px">Stop Music</button>
