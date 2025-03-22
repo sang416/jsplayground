@@ -18,13 +18,13 @@ const productUtils = {
 };
 
 // 상품 표시 함수 최적화
-function showItem(products, method = DISPLAY_METHODS.APPEND) {
+function showItem(products, buttonText='장바구니 담기',method = DISPLAY_METHODS.APPEND) {
   const productHTML = products.map(product => `
       <div class="col-sm-4">
           <img src="https://dummyimage.com/400x400/000/fff" class="w-100" alt="${product.title}">
           <h5>${product.title}</h5>
           <p>가격: ${productUtils.formatPrice(product.price)}</p>
-          <button class="btn btn-danger buy-btn">장바구니 담기</button>
+          <button class="btn btn-danger buy-btn">${buttonText}</button>
       </div>
   `).join('');
 
@@ -39,7 +39,7 @@ $(() => {
   ];
 
   // 초기 상품 표시
-  showItem(products, DISPLAY_METHODS.HTML);
+  showItem(products, '장바구니 담기',DISPLAY_METHODS.HTML);
 
   // 이벤트 핸들러 통합
   const handlers = {
@@ -47,16 +47,17 @@ $(() => {
           try {
               const data = await $.get('http://localhost:3000/products');
               products = [...products, ...data];
-              showItem(data, DISPLAY_METHODS.APPEND);
+              showItem(data, '장바구니 담기',DISPLAY_METHODS.APPEND);
           } catch (error) {
               console.error('데이터 로드 실패:', error);
           }
       },
-      'sort-btn': () => showItem(productUtils.sortByPrice(products), DISPLAY_METHODS.HTML),
-      'sort-byName-btn': () => showItem(productUtils.sortByName(products), DISPLAY_METHODS.HTML),
-      'filter-btn': () => showItem(productUtils.filterByPrice(products), DISPLAY_METHODS.HTML),
+      'sort-btn': () => showItem(productUtils.sortByPrice(products), '장바구니 담기',DISPLAY_METHODS.HTML),
+      'sort-byName-btn': () => showItem(productUtils.sortByName(products), '장바구니 담기',DISPLAY_METHODS.HTML),
+      'filter-btn': () => showItem(productUtils.filterByPrice(products), '장바구니 담기',DISPLAY_METHODS.HTML),
       'buy-btn': (e) => {
-        const newTitle = $(e.target).closest('div').find('h5').text();
+        // const newTitle = $(e.target).closest('div').find('h5').text();
+        const newTitle = $(e.target).siblings('h5').text();
         const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
         if (cart.includes(newTitle)) {
           console.log("이미 장바구니에 있는 상품입니다");
@@ -110,6 +111,6 @@ $(() => {
           }
       });
       
-      showItem(cartProducts, DISPLAY_METHODS.HTML);
+      showItem(cartProducts, '구매하기', DISPLAY_METHODS.HTML);
   }
 });
