@@ -82,4 +82,9 @@ $(() => {
   Object.entries(handlers).forEach(([className, handler]) => {
       $(`.${className}`).click(handler);
   });
+
+  let array0 = [1,2,3];
+  array0 = JSON.stringify(array0);
+  console.log(array0);
+  localStorage.setItem('number',array0);
 });
