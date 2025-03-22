@@ -267,7 +267,7 @@ ul.list::after {
 body{
   font-family: arial,helvetica;
   color: #fff;
-  text-align:center;
+  /* text-align:center; */
 }
 
 h1{
