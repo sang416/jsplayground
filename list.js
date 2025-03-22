@@ -24,7 +24,7 @@ function showItem(products, method = DISPLAY_METHODS.APPEND) {
           <img src="https://dummyimage.com/400x400/000/fff" class="w-100" alt="${product.title}">
           <h5>${product.title}</h5>
           <p>가격: ${productUtils.formatPrice(product.price)}</p>
-          <button class="btn btn-danger buy">구매</button>
+          <button class="btn btn-danger buy-btn">장바구니 담기</button>
       </div>
   `).join('');
 
@@ -55,36 +55,61 @@ $(() => {
       'sort-btn': () => showItem(productUtils.sortByPrice(products), DISPLAY_METHODS.HTML),
       'sort-byName-btn': () => showItem(productUtils.sortByName(products), DISPLAY_METHODS.HTML),
       'filter-btn': () => showItem(productUtils.filterByPrice(products), DISPLAY_METHODS.HTML),
-      'list-btn': () => {
-          $('.alert').html(products.map(product => 
-              `<p>${product.title}</p><p>${productUtils.formatPrice(product.price)}</p>`
-          ).join(''));
+      'buy-btn': (e) => {
+        const newTitle = $(e.target).closest('div').find('h5').text();
+        const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+        if (cart.includes(newTitle)) {
+          console.log("이미 장바구니에 있는 상품입니다");
+          return;
+        }
+        cart.unshift(newTitle);  // 새 상품을 배열 앞쪽에 추가
+        sessionStorage.setItem('cart', JSON.stringify(cart));
       },
+      /*
+      'buy-btn': (e) => {
+        let title = [$(e.target).closest('div').find('h5').text()];
+        if(sessionStorage.getItem('cart')!=null) {
+          let getTitle = JSON.parse(sessionStorage.getItem('cart'))
+          if(getTitle.includes(title[0])) {
+            console.log("이미 구매했어요");
+            return;
+          }
+          title = title.concat(getTitle);
+        }
+        title = JSON.stringify(title);
+        sessionStorage.setItem('cart', title);
+      },
+      */
       'post-btn': () => {
-        products.forEach(product => {
-          $.ajax({
-            url: 'http://localhost:3000/products',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(product),
-            success: function (data) {
-              console.log('추가됨:', data);
-            },
-            error: function (xhr, status, error) {
-              console.error('에러:', error);
-            }
-          });
-        });
+        // sessionStorage에 이미 cart 데이터가 있으므로
+        // products 데이터만 추가로 저장
+        sessionStorage.setItem('allProducts', JSON.stringify(products));
+        window.open('cart.html');
       }
   };
 
   // 이벤트 리스너 등록
   Object.entries(handlers).forEach(([className, handler]) => {
-      $(`.${className}`).click(handler);
+      // buy-btn은 동적으로 생성되므로 이벤트 위임 방식 사용
+      if (className === 'buy-btn') {
+          $(document).on('click', `.${className}`, handler);
+      } else {
+          $(`.${className}`).on('click',handler);
+      }
   });
 
-  let array0 = [1,2,3];
-  array0 = JSON.stringify(array0);
-  console.log(array0);
-  localStorage.setItem('number',array0);
+  // 현재 페이지가 cart.html인 경우에만 실행
+  if (window.location.pathname.includes('cart.html')) {
+      const products = JSON.parse(sessionStorage.getItem('allProducts') || '[]');
+      const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+      let cartProducts = [];
+      
+      products.forEach((item) => {
+          if (cart.includes(item.title)) {
+              cartProducts.push(item);
+          }
+      });
+      
+      showItem(cartProducts, DISPLAY_METHODS.HTML);
+  }
 });
