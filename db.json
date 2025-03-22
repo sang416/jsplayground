@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 0,
+      "price": 50000,
+      "title": "Springfield Shirt"
+    },
+    {
+      "id": 1,
+      "price": 60000,
+      "title": "Black Monastery"
+    },
+    {
+      "id": 2,
+      "price": 70000,
+      "title": "Blossom Dress"
+    },
+    {
+      "id": 3,
+      "price": 15000,
+      "title": "Leather Blazer"
+    },
+    {
+      "id": 4,
+      "price": 55000,
+      "title": "Yoga Leggings"
+    },
+    {
+      "id": 5,
+      "price": 30000,
+      "title": "Sleeveless Racer"
+    }
+  ]
+}
