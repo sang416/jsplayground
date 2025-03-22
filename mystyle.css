@@ -1,0 +1,33 @@
+.mt-2 {
+  display: none;
+}
+
+.mt-2 show {
+  display: block;
+}
+
+.col-sm-4 {
+  text-align: center;
+  margin-top : 20px;
+}
+
+.login_button {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-right: calc(-50vw + 50%);
+  margin-left: calc(-50vw + 50%);
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.button-group button {
+  margin: 0 5px;
+}
