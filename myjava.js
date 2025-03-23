@@ -184,11 +184,15 @@ const ToastManager = {
 /**
  * 슬라이드 관리자
  *
- * @type {{ currentSlide: number; totalSlides: number; init: () => void; goToSlide: (slideNum: any) => void; prevSlide: () => void; nextSlide: () => void; initSwipeEvents: () => void; }}
+ * @type {{ currentSlide: number; totalSlides: number; isDragging: boolean; startX: number; currentX: number; slideWidth: number; init: () => void; goToSlide: (slideNum: any) => void; prevSlide: () => void; nextSlide: () => void; initSwipeEvents: () => void; initDragEvents: () => void; }}
  */
 const SlideManager = {
   currentSlide: 1,
   totalSlides: 4,
+  isDragging: false,
+  startX: 0,
+  currentX: 0,
+  slideWidth: 0,
   
   init: () => {
     // 슬라이드 버튼 이벤트 설정
@@ -202,6 +206,53 @@ const SlideManager = {
     
     // Hammer.js 스와이프 이벤트 설정
     SlideManager.initSwipeEvents();
+    
+    // 마우스 드래그 이벤트 설정
+    SlideManager.initDragEvents();
+  },
+  
+  initDragEvents: () => {
+    const $slideContainer = $('.slide-container');
+    const $slideBox = $('.slide-box');
+    
+    $slideContainer.on('mousedown', (e) => {
+      SlideManager.isDragging = true;
+      SlideManager.startX = e.pageX;
+      SlideManager.currentX = e.pageX;
+      SlideManager.slideWidth = $slideBox.width();
+      
+      $slideContainer.css('cursor', 'grabbing');
+      $slideContainer.css('transition', 'none');
+    });
+    
+    $(document).on('mousemove', (e) => {
+      if (!SlideManager.isDragging) return;
+      
+      SlideManager.currentX = e.pageX;
+      const diff = SlideManager.currentX - SlideManager.startX;
+      
+      $slideContainer.css('transform', `translateX(calc(${(SlideManager.currentSlide - 1) * -100}vw + ${diff}px))`);
+    });
+    
+    $(document).on('mouseup', () => {
+      if (!SlideManager.isDragging) return;
+      
+      SlideManager.isDragging = false;
+      $slideContainer.css('cursor', 'grab');
+      $slideContainer.css('transition', 'transform 0.3s ease');
+      
+      const diff = SlideManager.currentX - SlideManager.startX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          SlideManager.prevSlide();
+        } else {
+          SlideManager.nextSlide();
+        }
+      } else {
+        SlideManager.goToSlide(SlideManager.currentSlide);
+      }
+    });
   },
   
   goToSlide: (slideNum) => {
@@ -210,17 +261,19 @@ const SlideManager = {
   },
   
   prevSlide: () => {
-    if (SlideManager.currentSlide > 1) {
-      SlideManager.currentSlide--;
-      SlideManager.goToSlide(SlideManager.currentSlide);
+    SlideManager.currentSlide--;
+    if (SlideManager.currentSlide < 1) {
+      SlideManager.currentSlide = SlideManager.totalSlides;
     }
+    SlideManager.goToSlide(SlideManager.currentSlide);
   },
   
   nextSlide: () => {
-    if (SlideManager.currentSlide < SlideManager.totalSlides) {
-      SlideManager.currentSlide++;
-      SlideManager.goToSlide(SlideManager.currentSlide);
+    SlideManager.currentSlide++;
+    if (SlideManager.currentSlide > SlideManager.totalSlides) {
+      SlideManager.currentSlide = 1;
     }
+    SlideManager.goToSlide(SlideManager.currentSlide);
   },
   
   initSwipeEvents: () => {
@@ -276,7 +329,7 @@ const EventManager = {
     });
     
     // 네비게이션 바 크기 조절
-    $(window).scroll(() => {
+    $(window).on('scroll', () => {
       window.scrollY > 100 
         ? $('.navbar-brand').css('font-size', '20px') 
         : $('.navbar-brand').css('font-size', '25px');
@@ -524,15 +577,9 @@ $(() => {
     // }
     // animateTitle();
     // setInterval(animateTitle, 2000);
+    $('.slide-container').on('mousemove', (e) => {
+      console.log(e.clientX, e.clientY);
+    });
   });
-  var myFullpage = new fullpage('#fullpage', {
-    anchors: ['home', 'content', 'footer'],
-
-    // Get your license at https://alvarotrigo.com/fullPage/pricing
-    licenseKey: 'xxxxxxxxxxxxxxxxxxxxxxxxx',
-
-    // Optional
-    navigation: true,
-    scrollingSpeed: 700
-  });
+  
 });
